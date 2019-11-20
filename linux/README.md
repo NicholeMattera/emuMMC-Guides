@@ -1,3 +1,11 @@
+# Guide for Setting Up EmuMMC for Your Hacked Nintendo Switch with Linux
+
+## Requirements
+
+- Linux based operating system (Installed or LiveCD)
+- GParted
+- Root access
+
 ## Guide
 
 1. Make sure everything on your SD Card is backed up on to your computer.
@@ -20,7 +28,7 @@
 ![Creating your emuMMC partition in GParted](images/Step10.png)
 11. Click "Apply All Operations" up in the top bar, confirm you want to apply and wait for it to finish.
 ![Writing your changes in GParted](images/Step11.png)
-12. Next we want to zero out the beginning and end of our emuMMC partition. The reason for doing this is because we formatted the partition as fat32, however we really only needed gparted to set the partition ID to something Hekate would pick up. On top of this Hekate won't write to the first or last 512kb of the partition. This is problematic if it's formatted as fat32, as some operating systems will continue to see this partition as a fat32 partition, and try to repair it. To do this open up a console window and run the following commands making sure to replace the `-` with the drive letter of your SD Card and the `#` with the partition number of your emuMMC partition: (**It should go without saying, however this is highly destructive triple check you have the correct block device in the "of" argument.**)
+12. Next we want to zero out the beginning and end of our emuMMC partition. The reason for doing this is because we formatted the partition as fat32, however we really only needed GParted to set the partition ID to something Hekate would pick up. On top of this Hekate won't write to the first or last 512kb of the partition. This is problematic if it's formatted as fat32, as some operating systems will continue to see this partition as a fat32 partition, and try to repair it. To do this open up a console window and run the following commands making sure to replace the `-` with the drive letter of your SD Card and the `#` with the partition number of your emuMMC partition: (**It should go without saying, however this is highly destructive triple check you have the correct block device in the "of" argument.**)
 
         sudo dd if=/dev/zero of=/dev/sd-# bs=1M count=1 status=progress
         sudo dd if=/dev/zero of=/dev/sd-# seek=29854 bs=1M count=1 status=progress
@@ -45,6 +53,7 @@
 22. Tap on "Close" on the top right, tap on "Launch", and boot into your emuMMC. (If you downloaded Hekate by itself then you needed to create a hekate_ipl.ini file in your bootloader folder. That is outside the scope of this guide. If you don't know how to do that then use Kosmos.)
 ![Hekate Launch Screen](../images/HekateStep7.png)
 23. Congratulations you are done. You can go into "System Settings", scroll down to "System", and you should see an "E" at the end of your "Current version:" indicating you are in your emuMMC.
+![System Settings Screen](../images/SystemSettings.jpg)
 
 ## Disclaimer
 
